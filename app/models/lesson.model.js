@@ -9,6 +9,6 @@ module.exports = (sequelize, Sequelize) => {
     published: {
       type: Sequelize.BOOLEAN,
     },
-  });
+  },{timestamps: false});
   return Lesson;
 };
