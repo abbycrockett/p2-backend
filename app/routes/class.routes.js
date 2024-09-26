@@ -9,9 +9,6 @@ module.exports = (app) => {
   // Retrieve all classes
   router.get("/", classes.findAll);
 
-  // Retrieve all Classes for user
-  router.get("/userClass/:userId", classes.findAllForUser);
-
   // Retrieve a single class with id
   router.get("/:id",  classes.findOne);
 
