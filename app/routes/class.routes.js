@@ -4,25 +4,25 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new Class group
-  router.post("/", [authenticate], classes.create);
+  router.post("/", classes.create);
 
   // Retrieve all classes
   router.get("/", classes.findAll);
 
   // Retrieve all Classes for user
-  router.get("/userClass/:userId", [authenticate], classes.findAllForUser);
+  router.get("/userClass/:userId", classes.findAllForUser);
 
   // Retrieve a single class with id
-  router.get("/:id", [authenticate], classes.findOne);
+  router.get("/:id",  classes.findOne);
 
   // Update a Class with id
-  router.put("/:id", [authenticate], classes.update);
+  router.put("/:id", classes.update);
 
   // Delete a Class with id
-  router.delete("/:id", [authenticate], classes.delete);
+  router.delete("/:id", classes.delete);
 
   // Delete all Classes
-  router.delete("/", [authenticate], classes.deleteAll);
+  router.delete("/",  classes.deleteAll);
 
   app.use("/class/classes", router);
 };
