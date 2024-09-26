@@ -3,11 +3,23 @@ module.exports = (sequelize, Sequelize) => {
     title: {
       type: Sequelize.STRING,
     },
-    description: {
+    number: {
       type: Sequelize.STRING,
     },
-    published: {
-      type: Sequelize.BOOLEAN,
+    roomNumber: {
+      type: Sequelize.STRING,
+    },
+    professor: {
+      type: Sequelize.STRING,
+    },
+    term: {
+      type: Sequelize.STRING,
+    },
+    year: {
+      type: Sequelize.STRING,
+    },
+    grade: {
+      type: Sequelize.STRING,
     },
   });
   return Class;
