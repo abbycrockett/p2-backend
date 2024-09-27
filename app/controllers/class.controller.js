@@ -2,7 +2,7 @@ const db = require("../models");
 const Class = db.class;
 const Op = db.Sequelize.Op;
 // Create and Save a new Class
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -12,26 +12,34 @@ exports.create = (req, res) => {
   }
   // Create a Class
   const myClass = {
-    title: req.body.title,
-    number: req.body.description,
-    roomNumber: req.body.title,
-    professor: req.body.title,
-    term: req.body.title,
-    year: req.body.title,
-    grade: req.body.title,
-    userId: req.body.userId,
+    department: req.body.department,
+    courseNumber: req.body.courseNumber,
+    level: req.body.level,
+    hours: req.body.hours,
+    name: req.body.name,
+    description: req.body.description,
   };
   // Save Class in the database
-  Class.create(myClass)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Class.",
-      });
+  try{
+    const data = await Class.create(myClass);
+    res.send(data);
+  }
+  catch(err){
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the Class.",
     });
+  }
+  // Class.create(myClass)
+  //   .then((data) => {
+  //     res.send(data);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send({
+  //       message:
+  //         err.message || "Some error occurred while creating the Class.",
+  //     });
+  //   });
 };
 // Retrieve all Classes from the database.
 exports.findAll = (req, res) => {

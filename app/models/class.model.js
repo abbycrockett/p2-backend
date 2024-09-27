@@ -1,24 +1,24 @@
 module.exports = (sequelize, Sequelize) => {
   const Class = sequelize.define("class", {
-    title: {
+    department: {
       type: Sequelize.STRING,
     },
-    number: {
+    courseNumber: {
       type: Sequelize.STRING,
     },
-    roomNumber: {
+    level: {
       type: Sequelize.STRING,
     },
-    professor: {
+    hours: {
       type: Sequelize.STRING,
     },
-    term: {
+    name: {
       type: Sequelize.STRING,
     },
     year: {
       type: Sequelize.STRING,
     },
-    grade: {
+    description: {
       type: Sequelize.STRING,
     },
   });
