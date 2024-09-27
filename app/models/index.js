@@ -15,7 +15,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 
-db.class = require("./class.model.js")(sequelize, Sequelize);
+db.course = require("./course.model.js")(sequelize, Sequelize);
 
 
 // foreign key for session

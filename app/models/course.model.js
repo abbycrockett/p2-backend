@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Class = sequelize.define("class", {
+  const Course = sequelize.define("course", {
     department: {
       type: Sequelize.STRING,
     },
@@ -15,12 +15,9 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING,
     },
-    year: {
-      type: Sequelize.STRING,
-    },
     description: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(1401),
     },
-  });
-  return Class;
+  },{ timestamps: false });
+  return Course;
 };
