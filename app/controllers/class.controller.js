@@ -13,8 +13,12 @@ exports.create = (req, res) => {
   // Create a Class
   const myClass = {
     title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false,
+    number: req.body.description,
+    roomNumber: req.body.title,
+    professor: req.body.title,
+    term: req.body.title,
+    year: req.body.title,
+    grade: req.body.title,
     userId: req.body.userId,
   };
   // Save Class in the database
