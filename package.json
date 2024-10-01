@@ -1,12 +1,12 @@
 {
-  "name": "tutorial-backend",
+  "name": "course-backend-t5",
   "version": "1.0.0",
-  "description": "Tutorial Node.js with Rest API",
+  "description": "Course Node.js with Rest API",
   "main": "server.js",
   "scripts": {
     "test": "jest --",
     "start": "node server.js",
-    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json tutorial-backend.service .env deploy"
+    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json course-backend-t5.service .env deploy"
   },
   "keywords": [
     "node.js",
@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.3",
     "googleapis": "^100.0.0",
     "jest": "^29.3.1",
