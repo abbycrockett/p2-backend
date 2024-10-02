@@ -1,36 +1,27 @@
+var createError = require("http-errors");
+var express = require("express");
+var cors = require("cors");
 require("dotenv").config();
 
-const express = require("express");
-const cors = require("cors");
+var app = express();
 
-const app = express();
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const db = require("./app/models");
 
-db.sequelize.sync({force: false});
+db.sequelize.sync();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:8080",
 };
 
 app.use(cors(corsOptions));
 app.options("*", cors());
 
-// parse requests of content-type - application/json
-app.use(express.json());
+// Require the course routes and inject the app
+require("./app/routes/course.routes.js")(app);
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
-
-require("./app/routes/course.routes")(app);
-
-// set port, listen for requests
-const PORT = process.env.PORT || 3015;
+const PORT = process.env.PORT || 8080;
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
