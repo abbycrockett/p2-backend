@@ -8,7 +8,6 @@ module.exports = (app) => {
 
   // Retrieve all 
   router.get("/", courses.findAll);
-
   
   // Retrieve a single course with id
   router.get("/:id",  courses.findOne);
