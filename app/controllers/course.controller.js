@@ -59,7 +59,7 @@ const testCreateCourse = () => {
 };
 
 // Comment out test course later
-testCreateCourse();
+//testCreateCourse();
 
 // Export other functions (find, update, delete) as necessary
 exports.findAll = (req, res) => {
