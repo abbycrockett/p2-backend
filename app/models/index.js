@@ -14,7 +14,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-
 db.course = require("./course.model.js")(sequelize, Sequelize);
 
 
