@@ -10,35 +10,20 @@ jobs:
   aws-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
           ref: dev
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "20.11.0"
       - run: npm install
-      - run: npm run bundle
+      - run: npm run build
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v2.1.1
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "deploy/"
+          SOURCE: "dist/"
           REMOTE_HOST: "project2.eaglesoftwareteam.com"
           REMOTE_USER: ubuntu
-          TARGET: "nodeapps/2024/project2/t5"
-      - name: Execute SSH commmands on remote server
-        uses: JimCronqvist/action-ssh@master
-        env:
-          NAME: "Root"
-        with:
-          hosts: "ubuntu@project2.eaglesoftwareteam.com"
-          privateKey: ${{ secrets.SERVER_SSH_KEY }}
-          debug: false
-          command: |
-            cd nodeapps/2024/project2/t5
-            npm install
-            sudo systemctl stop course-backend-t5
-            sudo cp course-backend.service /lib/systemd/system/course-backend-t5.service
-            sudo systemctl daemon-reload
-            sudo systemctl start course-backend-t5
+          TARGET: "/var/www/html/2024/project2/t5"
