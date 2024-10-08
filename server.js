@@ -9,12 +9,14 @@ const db = require("./app/models");
 
 db.sequelize.sync({force: false});
 
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors());
+const cor = cors({
+  origin: function (origin, callback) {
+    callback(null, true);
+  },
+  credentials: true,
+});
+app.use(cor);
+app.options("*", cor);
 
 // parse requests of content-type - application/json
 app.use(express.json());
