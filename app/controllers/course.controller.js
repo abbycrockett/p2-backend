@@ -1,15 +1,18 @@
+/* app/controllers/course.controller.js */
 const db = require("../models");
 const Course = db.course;
 const Op = db.Sequelize.Op;
+
 // Create and Save a new Course
-exports.create = async(req, res) => {
+exports.create = async (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.name) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Course needs a name!",
     });
     return;
   }
+
   // Create a Course
   const course = {
     department: req.body.department,
@@ -19,29 +22,46 @@ exports.create = async(req, res) => {
     name: req.body.name,
     description: req.body.description,
   };
+
   // Save Course in the database
-  try{
+  try {
     const data = await Course.create(course);
     res.send(data);
-  }
-  catch(err){
+  } catch (err) {
     res.status(500).send({
-      message:
-        err.message || "Some error occurred while creating the Course.",
+      message: err.message || "Some error occurred while creating the Course.",
     });
   }
-  // Class.create(myClass)
-  //   .then((data) => {
-  //     res.send(data);
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send({
-  //       message:
-  //         err.message || "Some error occurred while creating the Class.",
-  //     });
-  //   });
 };
-// Retrieve all Classes from the database.
+
+// Function to test Course creation
+const testCreateCourse = () => {
+  const testCourseData = {
+    department: "Amy P.",
+    courseNumber: "CS101",
+    level: "Undergraduate",
+    hours: "3",
+    name: "Introduction to Programming",
+    description: "This is a foundational course in programming.",
+  };
+
+  // Mock request and response objects
+  const mockReq = { body: testCourseData };
+  const mockRes = {
+    status: (code) => ({
+      send: (response) => console.log(`Test course creation: Status ${code}`, response),
+    }),
+    send: (response) => console.log('Response:', response),
+  };
+
+  // Call the create function with mock data
+  exports.create(mockReq, mockRes);
+};
+
+// Comment out test course later
+//testCreateCourse();
+
+// Export other functions (find, update, delete) as necessary
 exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
@@ -51,33 +71,13 @@ exports.findAll = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving courses.",
+        message: err.message || "Some error occurred while retrieving courses.",
       });
     });
 };
 
-// Find a single Course with an id
-exports.findAllForUser = (req, res) => {
-  const userId = req.params.userId;
-  Course.findAll({ where: { userId: userId } })
-    .then((data) => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `Cannot find Courses for user with id=${userId}.`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Error retrieving Courses for user with id=" + userId,
-      });
-    });
-};
+// Continue with other existing functions...
+
 // Find a single Course with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -97,6 +97,7 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
 // Update a Course by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
@@ -120,6 +121,7 @@ exports.update = (req, res) => {
       });
     });
 };
+
 // Delete a Course with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -143,6 +145,7 @@ exports.delete = (req, res) => {
       });
     });
 };
+
 // Delete all Courses from the database.
 exports.deleteAll = (req, res) => {
   Course.destroy({
@@ -154,8 +157,7 @@ exports.deleteAll = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all courses.",
+        message: err.message || "Some error occurred while removing all courses.",
       });
     });
 };
