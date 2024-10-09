@@ -52,6 +52,6 @@ jobs:
             cd nodeapps/2024/project2/t5
             npm install
             sudo systemctl stop course-backend-t5
-            sudo cp course=backend-t5.service /lib/systemd/system/course-backend-t5.service
+            sudo cp course-backend-t5.service /lib/systemd/system/course-backend-t5.service
             sudo systemctl daemon-reload
             sudo systemctl start course-backend-t5
